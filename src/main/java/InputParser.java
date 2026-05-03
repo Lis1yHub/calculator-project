@@ -16,11 +16,30 @@ public class InputParser {
             operator = '/';
         }
 
-        String[] expr_last = expr.split(Pattern.quote(String.valueOf(operator)));
+        if (!expr.matches(".*\\d.*\\d.*")) {
+            throw new InvalidFormatException();
+        }
 
-        int num1 = Integer.parseInt(expr_last[0].trim());
-        int num2 = Integer.parseInt(expr_last[1].trim());
+        if (operator == ' ') {
+            throw new InvalidOperatorException();
+        }
 
-        return new Expression(num1, num2, operator);
+        String[] parts = expr.split(Pattern.quote(String.valueOf(operator)));
+
+        if (parts.length != 2) {
+            throw new InvalidFormatException();
+        }
+
+        try {
+            String leftPart = parts[0];
+            String rightPart = parts[1];
+
+            int num1 = Integer.parseInt(leftPart);
+            int num2 = Integer.parseInt(rightPart);
+
+            return new Expression(num1, num2, operator);
+        } catch (NumberFormatException e) {
+            throw new InvalidFormatException();
+        }
     }
 }

@@ -1,24 +1,30 @@
 public class Calculator {
 
-    public static double calculate(double a, double b, String op) {
-        switch (op) {
-            case "+":
-                return a + b;
-            case "-":
-                return a - b;
-            case "*":
-                return a * b;
-            case "/":
-                if (b == 0) {
-                    throw new ArithmeticException("Деление на ноль");
-                }
-                return a / b;
+    // основной калькулятор
+    public static int calculate(int a, int b, char operator) {
+        switch (operator) {
+            case '+':
+                return sum(a, b);
+            case '-':
+                return subtract(a, b);
+            case '*':
+                return multiply(a, b);
+            case '/':
+                return divide(a, b);
             default:
-                throw new IllegalArgumentException("Неизвестный оператор");
+                throw new InvalidOperatorException();
         }
     }
 
-    // твои старые методы можно оставить
+    // для обработки тестов, возвращает основной калькулятор
+    public static int calculate(int a, int b, String operator) {
+        if (operator.length() != 1) {
+            throw new InvalidOperatorException();
+        }
+        return calculate(a, b, operator.charAt(0));
+    }
+
+
     public static int sum(int a, int b){
         return a + b;
     }
@@ -33,7 +39,7 @@ public class Calculator {
 
     public static int divide(int a, int b){
         if (b == 0) {
-            throw new ArithmeticException("Ошибка: деление на ноль");
+            throw new DivisionByZeroException();
         }
         return a / b;
     }
