@@ -1,7 +1,6 @@
-import exception.AppException;
-import exception.DivisionByZeroException;
-import exception.InvalidFormatException;
-import exception.InvalidOperatorException;
+package calculator;
+
+import calculator.exception.AppException;
 
 import java.util.Scanner;
 

@@ -1,3 +1,5 @@
+package calculator;
+
 public class Constants {
     public static final String EXIT = "exit";
     public static final String YES = "да";

@@ -1,5 +1,7 @@
-import exception.DivisionByZeroException;
-import exception.InvalidOperatorException;
+package calculator;
+
+import calculator.exception.DivisionByZeroException;
+import calculator.exception.InvalidOperatorException;
 
 public class Calculator {
 

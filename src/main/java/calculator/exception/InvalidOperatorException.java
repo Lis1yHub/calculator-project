@@ -1,4 +1,5 @@
-package exception;
+package calculator.exception;
+import calculator.Constants;
 
 public class InvalidOperatorException extends AppException {
     public InvalidOperatorException() {
