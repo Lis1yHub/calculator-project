@@ -1,3 +1,8 @@
+import exception.AppException;
+import exception.DivisionByZeroException;
+import exception.InvalidFormatException;
+import exception.InvalidOperatorException;
+
 import java.util.Scanner;
 
 public class Application {
@@ -42,10 +47,7 @@ public class Application {
                         System.out.println("Напишите \"да\" или \"нет\"");
                     }
                 }
-            } catch (InvalidOperatorException
-                     | InvalidFormatException
-                     | DivisionByZeroException e) {
-
+            } catch (AppException e) {
                 System.out.println(e.getMessage());
             }
         }

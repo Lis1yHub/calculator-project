@@ -1,3 +1,6 @@
+import exception.DivisionByZeroException;
+import exception.InvalidOperatorException;
+
 public class Calculator {
 
     // основной калькулятор
