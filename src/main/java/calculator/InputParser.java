@@ -39,8 +39,8 @@ public class InputParser {
             String leftPart = parts[0];
             String rightPart = parts[1];
 
-            int num1 = Integer.parseInt(leftPart);
-            int num2 = Integer.parseInt(rightPart);
+            double num1 = Double.parseDouble(leftPart);
+            double num2 = Double.parseDouble(rightPart);
 
             return new Expression(num1, num2, operator);
         } catch (NumberFormatException e) {

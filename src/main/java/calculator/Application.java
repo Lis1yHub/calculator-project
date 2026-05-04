@@ -1,28 +1,29 @@
 package calculator;
-
+import calculator.commands.Help;
+import calculator.commands.HistoryManager;
+import calculator.commands.Exit;
 import calculator.exception.AppException;
-
 import java.util.Scanner;
 
 public class Application {
     Scanner input = new Scanner(System.in);
     boolean running = true;
+    HistoryManager history = new HistoryManager();
 
     public void run() {
         while (running) {
-            System.out.println("Введите выражение:");
-
-            String expr = input.nextLine();
-
-            if (expr.equals(Constants.EXIT)) {
-                System.out.println(Constants.GOODBYE_MESSAGE);
-                break;
-            }
-
             try {
+
+                System.out.println("Введите выражение или команду:");
+                String expr = input.nextLine();
+
+                if (handleCommand(expr)) {
+                    continue;
+                }
+
                 Expression expression = InputParser.parse(expr);
 
-                int result = Calculator.calculate(
+                double result = Calculator.calculate(
                         expression.num1,
                         expression.num2,
                         expression.operator
@@ -30,31 +31,40 @@ public class Application {
 
                 System.out.println(result);
 
-                System.out.println("Вы хотите ввести еще одно выражение?");
+                String record = expression.num1 + " "
+                        + expression.operator + " "
+                        + expression.num2 + " "
+                        + " = " + result;
+                history.add(record);
 
-                while (true) {
-                    String ans = input.nextLine()
-                            .toLowerCase()
-                            .replaceAll("\\s", "");
-                    if (ans.equals(Constants.YES)) {
-                        break;
-                    } else if (ans.equals(Constants.NO) || ans.equals(Constants.EXIT)) {
-                        exitProgram();
-                        running = false;
-                        break;
-                    } else {
-                        System.out.println("Напишите \"да\" или \"нет\"");
-                    }
-                }
-            } catch (AppException e) {
+            } catch(AppException e){
                 System.out.println(e.getMessage());
             }
         }
     }
-
-    private void exitProgram() {
-        System.out.println(Constants.GOODBYE_MESSAGE);
+    private boolean handleCommand(String expr) {
+        switch (expr) {
+            case "history":
+                history.printHistory();
+                return true;
+            case "last":
+                history.last();
+                return true;
+            case "clear":
+                history.clear();
+                return true;
+            case "help":
+                Help.execute();
+                return true;
+            case "exit":
+                Exit.execute();
+                return true;
+            default:
+                return false;
+        }
     }
 }
+
+
 
 

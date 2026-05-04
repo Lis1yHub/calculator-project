@@ -6,7 +6,7 @@ import calculator.exception.InvalidOperatorException;
 public class Calculator {
 
     // основной калькулятор
-    public static int calculate(int a, int b, char operator) {
+    public static double calculate(double a, double b, char operator) {
         switch (operator) {
             case '+':
                 return sum(a, b);
@@ -22,7 +22,7 @@ public class Calculator {
     }
 
     // для обработки тестов, возвращает основной калькулятор
-    public static int calculate(int a, int b, String operator) {
+    public static double calculate(double a, double b, String operator) {
         if (operator.length() != 1) {
             throw new InvalidOperatorException();
         }
@@ -30,19 +30,19 @@ public class Calculator {
     }
 
 
-    public static int sum(int a, int b){
+    public static double sum(double a, double b){
         return a + b;
     }
 
-    public static int subtract(int a, int b){
+    public static double subtract(double a, double b){
         return a - b;
     }
 
-    public static int multiply(int a, int b){
+    public static double multiply(double a, double b){
         return a * b;
     }
 
-    public static int divide(int a, int b){
+    public static double divide(double a, double b){
         if (b == 0) {
             throw new DivisionByZeroException();
         }
