@@ -1,14 +1,25 @@
 package calculator;
-import calculator.commands.Help;
-import calculator.commands.HistoryManager;
-import calculator.commands.Exit;
+import calculator.commands.*;
 import calculator.exception.AppException;
+import calculator.exception.InvalidFormatException;
+
 import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Application {
-    Scanner input = new Scanner(System.in);
-    boolean running = true;
+    private Scanner input = new Scanner(System.in);
+    private boolean running = true;
     HistoryManager history = new HistoryManager();
+    private final Map<String, Command> commands = new HashMap<>();
+
+    public Application () {
+        commands.put("exit", new ExitCommand());
+        commands.put("help", new HelpCommand());
+        commands.put("history", new HistoryCommand(history));
+        commands.put("last", new LastCommand(history));
+        commands.put("clear", new ClearCommand(history));
+    }
 
     public void run() {
         while (running) {
@@ -17,7 +28,9 @@ public class Application {
                 System.out.println("Введите выражение или команду:");
                 String expr = input.nextLine();
 
-                if (handleCommand(expr)) {
+                Command command = commands.get(expr);
+                if (command != null) {
+                    command.execute();
                     continue;
                 }
 
@@ -37,30 +50,9 @@ public class Application {
                         + " = " + result;
                 history.add(record);
 
-            } catch(AppException e){
+            } catch (AppException e) {
                 System.out.println(e.getMessage());
             }
-        }
-    }
-    private boolean handleCommand(String expr) {
-        switch (expr) {
-            case "history":
-                history.printHistory();
-                return true;
-            case "last":
-                history.last();
-                return true;
-            case "clear":
-                history.clear();
-                return true;
-            case "help":
-                Help.execute();
-                return true;
-            case "exit":
-                Exit.execute();
-                return true;
-            default:
-                return false;
         }
     }
 }

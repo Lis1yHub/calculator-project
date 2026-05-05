@@ -1,35 +1,39 @@
 package calculator;
-
+import java.util.Map;
+import java.util.HashMap;
 import calculator.exception.InvalidFormatException;
-import calculator.exception.InvalidOperatorException;
 
 import java.util.regex.Pattern;
 
 public class InputParser {
+
+    private static final Map<String, String> operators = new HashMap<>();
+
+    static {
+        operators.put("+", "+");
+        operators.put("-", "-");
+        operators.put("*", "*");
+        operators.put("/", "/");
+        operators.put("%", "%");
+    }
+
     public static Expression parse(String expr) {
         expr = expr.replaceAll("\\s", "");
 
-        char operator = ' ';
+        String operator = null;
 
-        if (expr.contains("+")) {
-            operator = '+';
-        } else if (expr.contains("-")) {
-            operator = '-';
-        } else if (expr.contains("*")) {
-            operator = '*';
-        } else if (expr.contains("/")) {
-            operator = '/';
-        }
+        for (String op: operators.keySet()) {
+            if (expr.contains(op)) {
+                operator = op;
+                break;
+            }
+        };
 
-        if (!expr.matches(".*\\d.*\\d.*")) {
+        if (operator == null) {
             throw new InvalidFormatException();
         }
 
-        if (operator == ' ') {
-            throw new InvalidOperatorException();
-        }
-
-        String[] parts = expr.split(Pattern.quote(String.valueOf(operator)));
+        String[] parts = expr.split(Pattern.quote(operator));
 
         if (parts.length != 2) {
             throw new InvalidFormatException();
