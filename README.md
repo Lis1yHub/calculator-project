@@ -10,3 +10,4 @@ mvn compile
 mvn exec:java -Dexec.mainClass="com.yourname.calculator.Main"
 ## Тесты
 mvn test
+
