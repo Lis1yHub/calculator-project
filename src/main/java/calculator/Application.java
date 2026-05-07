@@ -1,15 +1,13 @@
 package calculator;
 import calculator.commands.*;
 import calculator.exception.AppException;
-import calculator.exception.InvalidFormatException;
 
 import java.util.Scanner;
 import java.util.Map;
 import java.util.HashMap;
 
 public class Application {
-    private Scanner input = new Scanner(System.in);
-    private boolean running = true;
+    private final Scanner input = new Scanner(System.in);
     HistoryManager history = new HistoryManager();
     private final Map<String, Command> commands = new HashMap<>();
 
@@ -22,7 +20,7 @@ public class Application {
     }
 
     public void run() {
-        while (running) {
+        while (true) {
             try {
 
                 System.out.println("Введите выражение или команду:");
@@ -37,16 +35,16 @@ public class Application {
                 Expression expression = InputParser.parse(expr);
 
                 double result = Calculator.calculate(
-                        expression.num1,
-                        expression.num2,
-                        expression.operator
+                        expression.getNum1(),
+                        expression.getNum2(),
+                        expression.getOperator()
                 );
 
                 System.out.println(result);
 
-                String record = expression.num1 + " "
-                        + expression.operator + " "
-                        + expression.num2 + " "
+                String record = expression.getNum1() + " "
+                        + expression.getOperator() + " "
+                        + expression.getNum2() + " "
                         + " = " + result;
                 history.add(record);
 

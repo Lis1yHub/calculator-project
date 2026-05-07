@@ -30,6 +30,6 @@ public class OperationsTest {
     @Test
     void unknownOperatorThrows() {
         assertThrows(InvalidOperatorException.class,
-            () -> Calculator.calculate(5, 3, "%"));
+            () -> Calculator.calculate(5, 3, "р"));
     }
 }

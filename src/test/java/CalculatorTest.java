@@ -1,4 +1,5 @@
 import calculator.Calculator;
+import calculator.exception.AppException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +27,7 @@ public class CalculatorTest {
 
     @Test
     void divisionByZeroThrowsException() {
-        assertThrows(ArithmeticException.class,
+        assertThrows(AppException.class,
                 () -> Calculator.calculate(5, 0, "/"));
     }
 }

@@ -30,8 +30,12 @@ public class HistoryManager {
     }
 
     public void last() {
-        String last_operation = history.get(history.size() - 1);
-        System.out.println(last_operation);
+        if (history.isEmpty()) {
+            System.out.println("История вычислений пуста.");
+        } else {
+            String last_operation = history.get(history.size() - 1);
+            System.out.println(last_operation);
+        }
     }
 
     // для тестов

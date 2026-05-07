@@ -5,6 +5,7 @@ public class LastCommand implements Command {
     private final HistoryManager history;
 
     public LastCommand(HistoryManager history){
+
         this.history = history;
     }
 

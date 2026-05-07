@@ -2,6 +2,7 @@ package calculator;
 import java.util.Map;
 import java.util.HashMap;
 import calculator.exception.InvalidFormatException;
+import calculator.exception.InvalidOperatorException;
 
 import java.util.regex.Pattern;
 
@@ -30,7 +31,7 @@ public class InputParser {
         };
 
         if (operator == null) {
-            throw new InvalidFormatException();
+            throw new InvalidOperatorException();
         }
 
         String[] parts = expr.split(Pattern.quote(operator));
