@@ -1,5 +1,7 @@
 package calculator.commands;
 
+import calculator.commands.history.HistoryManager;
+
 public class LastCommand implements Command {
 
     private final HistoryManager history;

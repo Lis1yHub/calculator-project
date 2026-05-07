@@ -1,5 +1,6 @@
 package calculator;
 import calculator.commands.*;
+import calculator.commands.history.HistoryManager;
 import calculator.exception.AppException;
 
 import java.util.Scanner;

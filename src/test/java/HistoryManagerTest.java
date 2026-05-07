@@ -1,5 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import calculator.commands.HistoryManager;
+import calculator.commands.history.HistoryManager;
 import org.junit.jupiter.api.Test;
 
 public class HistoryManagerTest {

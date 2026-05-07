@@ -1,9 +1,9 @@
-package calculator.commands;
+package calculator.commands.history;
 import java.util.ArrayList;
 
 public class HistoryManager {
 
-    private ArrayList<String> history = new ArrayList<>();
+    private final ArrayList<String> history = new ArrayList<>();
 
     public void add(String operation) {
         if (history.size() == 10) {
